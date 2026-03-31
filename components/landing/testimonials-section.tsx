@@ -10,11 +10,11 @@ const testimonials = [
     name: "David G.",
     age: "41 años",
     avatar: "/images/avatar-2.jpg",
-    quote: "Llevaba tiempo entrenando con molestias y sin notar avances. Al corregir la técnica, dejé de tener dolor y por fin empecé a ganar músculo.",
+    quote: "Llevaba tiempo entrenando con molestias y sin notar avances. Al corregir la técnica, ajustar la carga y ordenar el plan, dejé de tener dolor y por fin empecé a ganar músculo.",
     result: "+4 kg músculo",
     beforeImage: "/images/before-2.jpg",
     afterImage: "/images/after-2.jpg",
-    problem: "Llegó con dolor y sin ganar músculo."
+    problem: "Llegó con dolor y sin ganar músculo pese a entrenar con constancia."
   }
 ]
 

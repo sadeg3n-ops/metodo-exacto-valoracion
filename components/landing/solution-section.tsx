@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { ChevronDown } from "lucide-react"
 import { useInView } from "framer-motion"
 import { Card, CardContent } from "@/components/ui/card"
@@ -12,21 +12,21 @@ const features = [
   {
     title: "Entrenamiento programado",
     subtitle: "El estímulo exacto",
-    description: "Rutina diseñada y adaptada a tu nivel, tu material, tu experiencia y el tiempo del que dispones.",
+    description: "Rutina adaptada a tu nivel, tu material, tu experiencia y el tiempo real del que dispones.",
     image: "/images/process/entrenamiento-con-criterio.png",
     imagePosition: "center center",
   },
   {
     title: "Nutrición sostenible",
-    subtitle: "Comer bien, sin aislarte",
+    subtitle: "Comer bien sin complicarte",
     description: "Objetivos claros, pautas flexibles y margen para comer fuera sin cortar el progreso.",
     image: "/images/process/nutricion-sostenible.png",
     imagePosition: "center center",
   },
   {
     title: "Seguimiento constante",
-    subtitle: "Ajustes con datos",
-    description: "Revisamos tu técnica y sensaciones para corregirlas en el momento correcto y evitar lesiones.",
+    subtitle: "Ajustes cuando toca",
+    description: "Revisamos técnica, recuperación y rendimiento para corregir antes del estancamiento o de las molestias.",
     image: "/images/process/seguimiento-constante.png",
     imagePosition: "center center",
   }
@@ -40,11 +40,25 @@ function SolutionFeatureCard({
   index: number
 }) {
   const ref = useRef<HTMLDivElement>(null)
-  const isMobileActive = useInView(ref, {
+  const [isMobileViewport, setIsMobileViewport] = useState(false)
+  const isInView = useInView(ref, {
     once: false,
     amount: 0.65,
     margin: "-10% 0px -20% 0px",
   })
+  const isMobileActive = isMobileViewport && isInView
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+
+    const mediaQuery = window.matchMedia("(max-width: 767px)")
+    const updateViewport = () => setIsMobileViewport(mediaQuery.matches)
+
+    updateViewport()
+    mediaQuery.addEventListener("change", updateViewport)
+
+    return () => mediaQuery.removeEventListener("change", updateViewport)
+  }, [])
 
   return (
     <Reveal
@@ -127,12 +141,12 @@ export function SolutionSection() {
           </Reveal>
           <Reveal delay={0.1}>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4 text-balance">
-              Qué cambia cuando trabajamos con un sistema claro
+              Qué cambia cuando dejas de improvisar
             </h2>
           </Reveal>
           <Reveal delay={0.2}>
             <p className="text-lg text-muted-foreground">
-              Diagnóstico, programación y ajustes continuos. Sabes qué hacer, por qué hacerlo y cuándo tocar cada variable.
+              Diagnóstico, programación y ajustes continuos. Sabes qué hacer, cuánto hacer y qué tocar según tu respuesta.
             </p>
           </Reveal>
         </div>

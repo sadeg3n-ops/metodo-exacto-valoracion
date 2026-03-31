@@ -35,7 +35,7 @@ export function FooterSection({ onCtaClick }: FooterSectionProps) {
             </h2>
 
             <p className="text-lg md:text-xl text-muted-foreground mb-8 md:mb-12 max-w-2xl mx-auto text-pretty">
-              Vemos tu punto de partida, qué te frena ahora y si tiene sentido trabajar juntos.
+              Vemos tu punto de partida, qué te está frenando y si tiene sentido trabajar contigo.
             </p>
 
             <Button
@@ -43,7 +43,7 @@ export function FooterSection({ onCtaClick }: FooterSectionProps) {
               size="lg"
               className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-lg md:text-xl px-10 md:px-12 py-7 md:py-8 rounded-2xl group transition-all hover:scale-105 shadow-[0_18px_60px_rgba(234,109,31,0.25)]"
             >
-              Reservar valoración inicial
+              Reservar valoración
               <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
             </Button>
 
@@ -67,7 +67,7 @@ export function FooterSection({ onCtaClick }: FooterSectionProps) {
                 </span>
               </a>
               <p className="text-muted-foreground/80 text-sm max-w-xs mx-auto md:mx-0">
-                Entrenamiento y nutrición con criterio, seguimiento y ajustes reales.
+                Entrenamiento y nutrición con criterio, seguimiento y ajustes reales para avanzar sin perder tiempo.
               </p>
             </div>
 

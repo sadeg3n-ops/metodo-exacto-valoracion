@@ -7,18 +7,18 @@ import { Reveal } from "@/components/ui/reveal"
 const problems = [
   {
     icon: TrendingDown,
-    title: "Rutina sin progresión",
-    description: "Entrenas, pero no sabes qué tocar para seguir mejorando."
+    title: "Rutina sin dirección",
+    description: "Entrenas, pero no sabes qué tocar cuando te estancas o empiezas a acumular fatiga."
   },
   {
     icon: Users,
-    title: "Dietas difíciles de seguir",
-    description: "Si no te gusta lo que comes, acabarás abandonando."
+    title: "Nutrición imposible de sostener",
+    description: "Si comer bien te complica la vida o te aísla, acabarás soltándolo."
   },
   {
     icon: AlertCircle,
-    title: "Cero personalización",
-    description: "Sin seguimiento ni ajustes, dejarás de mejorar rápido."
+    title: "Sin seguimiento real",
+    description: "Sin ajustes en el momento correcto, es fácil perder semanas sin saber qué está fallando."
   }
 ]
 
@@ -29,12 +29,12 @@ export function ProblemSection() {
         <div className="max-w-3xl mx-auto text-center mb-16">
           <Reveal>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 text-balance">
-              Si entrenas y comes sin seguir un plan, te estancas.
+              Si entrenas y comes razonablemente bien, pero no avanzas, no te falta esfuerzo.
             </h2>
           </Reveal>
           <Reveal delay={0.1}>
             <p className="text-lg text-slate-600">
-              El problema rara vez es la actitud. Suele ser el sistema.
+              Suele faltar dirección, ajustes y un sistema que encaje con tu vida real.
             </p>
           </Reveal>
         </div>

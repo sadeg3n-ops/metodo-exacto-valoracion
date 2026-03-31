@@ -45,16 +45,16 @@ export function HeroSection({ onCtaClick }: HeroSectionProps) {
 
           <Reveal delay={0.2} duration={0.8}>
             <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-6 text-balance text-foreground drop-shadow-[0_6px_24px_rgba(0,0,0,0.75)]">
-              La asesoría online para personas que entrenan{" "}
+              Entrena con criterio y{" "}
               <span className="animate-text-gradient bg-gradient-to-r from-primary via-orange-400 to-primary">
-                pero no ven cambios
+                deja de estancarte
               </span>
             </h1>
           </Reveal>
 
           <Reveal delay={0.3} duration={0.8}>
             <p className="text-lg md:text-xl text-foreground/80 max-w-2xl mx-auto mb-10 text-pretty drop-shadow-[0_4px_18px_rgba(0,0,0,0.65)]">
-              Detectamos qué está frenando tu progreso y si tiene sentido trabajar juntos.
+              Asesoría online para personas que entrenan, tienen poco tiempo y quieren resultados medibles sin vivir para el gimnasio.
             </p>
           </Reveal>
 

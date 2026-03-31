@@ -11,27 +11,35 @@ import { Reveal } from "@/components/ui/reveal"
 const faqs = [
   {
     question: "¿Y si tengo poco tiempo?",
-    answer: "Adaptamos el plan a tus necesidades para que sea cómodo para ti y puedas ver progresos."
+    answer: "Mejor. Cuando el tiempo es limitado, más importante es hacer lo exacto. El plan se diseña para encajar en tu agenda real."
   },
   {
     question: "¿Sirve si empiezo desde cero?",
-    answer: "Sí. Empezar con supervisión ahorra mucho más tiempo que ir a base de prueba y error."
+    answer: "Sí. Empezar con supervisión te ahorra meses de prueba y error."
   },
   {
     question: "¿Y si ya lo he intentado antes?",
-    answer: "Lo que suele fallar es el sistema. Para asegurarnos de que progreses, revisamos los resultados y ajustamos el plan para mantener un progreso constante."
+    answer: "Lo que suele fallar no es la constancia, sino el sistema. Aquí ajustamos según tu respuesta, no según una plantilla fija."
+  },
+  {
+    question: "¿Y si tengo dolor o molestias?",
+    answer: "Se tiene en cuenta desde el principio. Ajustamos ejercicios, carga y técnica para que puedas avanzar con seguridad."
+  },
+  {
+    question: "¿Y si hay semanas en las que rindo peor o tengo menos energía?",
+    answer: "También se ajusta. El plan no se aplica igual todas las semanas: adaptamos carga, volumen y expectativas según tu recuperación real."
   },
   {
     question: "¿Necesito gimnasio?",
-    answer: "No. Puedes trabajar en casa con el material que tengas, aunque te diremos el mínimo del que te conviene disponer para progresar mejor."
+    answer: "No. Puedes trabajar en casa con el material que tengas, aunque te diremos el mínimo que conviene tener para progresar mejor."
   },
   {
     question: "¿Me vais a vender algo en la valoración?",
-    answer: "El objetivo de la llamada de valoración es conocerte, ver si podemos ayudarte y proponerte dar un paso adelante con nosotros solo si lo vemos claro y encaja por parte de ambos."
+    answer: "No. La llamada sirve para entender tu caso, detectar el bloqueo y decirte con honestidad si este servicio tiene sentido para ti."
   },
   {
     question: "¿Cuándo se suelen notar cambios?",
-    answer: "Medimos los resultados de forma sólida mes a mes, pudiendo ver pequeñas mejoras cada 1 o 2 semanas, dependiendo del caso y de la experiencia previa."
+    answer: "Las primeras mejoras suelen verse pronto en control, energía y sensaciones. Los cambios medibles se revisan mes a mes."
   }
 ]
 
@@ -84,7 +92,7 @@ export function FaqSection() {
 
           <Reveal delay={0.1}>
             <p className="text-muted-foreground mb-6 text-sm">
-              Escríbenos y te responderemos lo antes posible para ayudarte a dar el primer paso.
+              Escríbenos y te responderemos lo antes posible para ayudarte a entender cuál es tu mejor siguiente paso.
             </p>
           </Reveal>
 

@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils"
 
 const features = [
   {
-    title: "Entrenamiento con criterio",
+    title: "Entrenamiento programado",
     subtitle: "El estímulo exacto",
     description: "Rutina diseñada y adaptada a tu nivel, tu material, tu experiencia y el tiempo del que dispones.",
     image: "/images/process/entrenamiento-con-criterio.png",

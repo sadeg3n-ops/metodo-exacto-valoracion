@@ -1,9 +1,12 @@
 "use client"
 
+import { useRef } from "react"
 import { ChevronDown } from "lucide-react"
+import { useInView } from "framer-motion"
 import { Card, CardContent } from "@/components/ui/card"
 import { Reveal } from "@/components/ui/reveal"
 import { Tilt } from "@/components/ui/tilt"
+import { cn } from "@/lib/utils"
 
 const features = [
   {
@@ -28,6 +31,86 @@ const features = [
     imagePosition: "center center",
   }
 ]
+
+function SolutionFeatureCard({
+  feature,
+  index,
+}: {
+  feature: (typeof features)[number]
+  index: number
+}) {
+  const ref = useRef<HTMLDivElement>(null)
+  const isMobileActive = useInView(ref, {
+    once: false,
+    amount: 0.65,
+    margin: "-10% 0px -20% 0px",
+  })
+
+  return (
+    <Reveal
+      key={feature.title}
+      delay={0.3 + index * 0.15}
+      className={index === 0 ? "lg:col-span-2 lg:row-span-2" : ""}
+    >
+      <Tilt className="h-full">
+        <Card
+          ref={ref}
+          className="group relative h-full overflow-hidden border-border/70 bg-card/30 hover:border-primary/60 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10"
+        >
+          <div
+            className="absolute inset-0 scale-100 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+            style={{
+              backgroundImage: `url('${feature.image}')`,
+              backgroundPosition: feature.imagePosition,
+            }}
+          />
+          <div
+            className={cn(
+              "absolute inset-0 transition-colors duration-500 md:bg-black/45 md:group-hover:bg-black/80",
+              isMobileActive ? "bg-black/72" : "bg-black/42",
+            )}
+          />
+          <div
+            className={cn(
+              "absolute inset-0 transition-all duration-500 md:bg-gradient-to-t md:from-black/90 md:via-black/45 md:to-black/20 md:group-hover:from-black/95 md:group-hover:via-black/80 md:group-hover:to-black/55",
+              isMobileActive
+                ? "bg-gradient-to-t from-black/96 via-black/78 to-black/34"
+                : "bg-gradient-to-t from-black/88 via-black/44 to-black/16",
+            )}
+          />
+
+          <CardContent
+            className={cn(
+              "relative z-10 flex h-full flex-col justify-end p-6 text-left md:p-8",
+              index === 0 ? "md:p-12" : "",
+            )}
+          >
+            <div className="max-w-xl">
+              <h3 className={cn("font-semibold text-white mb-2", index === 0 ? "text-3xl md:text-4xl" : "text-2xl")}>
+                {feature.title}
+              </h3>
+              <p className={cn("text-primary font-semibold tracking-wide", index === 0 ? "text-lg md:text-xl" : "text-base")}>
+                {feature.subtitle}
+              </p>
+              <p
+                className={cn(
+                  "mt-4 text-sm md:text-base leading-relaxed transition-all duration-500",
+                  index === 0 ? "max-w-lg" : "max-w-sm",
+                  "md:text-slate-300 md:opacity-0 md:translate-y-4 md:group-hover:opacity-100 md:group-hover:translate-y-0",
+                  isMobileActive
+                    ? "max-h-40 opacity-100 translate-y-0 text-slate-300"
+                    : "max-h-0 opacity-0 translate-y-3 overflow-hidden text-slate-300/0",
+                )}
+              >
+                {feature.description}
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+      </Tilt>
+    </Reveal>
+  )
+}
 
 export function SolutionSection() {
   return (
@@ -56,39 +139,7 @@ export function SolutionSection() {
 
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3 max-w-5xl mx-auto md:auto-rows-fr">
           {features.map((feature, index) => (
-            <Reveal
-              key={feature.title}
-              delay={0.3 + index * 0.15}
-              className={index === 0 ? "lg:col-span-2 lg:row-span-2" : ""}
-            >
-              <Tilt className="h-full">
-                <Card className="group relative h-full overflow-hidden border-border/70 bg-card/30 hover:border-primary/60 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10">
-                  <div
-                    className="absolute inset-0 scale-100 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
-                    style={{
-                      backgroundImage: `url('${feature.image}')`,
-                      backgroundPosition: feature.imagePosition,
-                    }}
-                  />
-                  <div className="absolute inset-0 bg-black/45 transition-colors duration-500 group-hover:bg-black/80" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-black/20 transition-all duration-500 group-hover:from-black/95 group-hover:via-black/80 group-hover:to-black/55" />
-
-                  <CardContent className={`relative z-10 flex h-full flex-col justify-end p-6 md:p-8 text-left ${index === 0 ? "md:p-12" : ""}`}>
-                    <div className="max-w-xl">
-                      <h3 className={`font-semibold text-white mb-2 ${index === 0 ? "text-3xl md:text-4xl" : "text-2xl"}`}>
-                        {feature.title}
-                      </h3>
-                      <p className={`text-primary font-semibold tracking-wide ${index === 0 ? "text-lg md:text-xl" : "text-base"}`}>
-                        {feature.subtitle}
-                      </p>
-                      <p className={`mt-4 text-sm md:text-base leading-relaxed text-slate-300 transition-all duration-500 md:opacity-0 md:translate-y-4 md:group-hover:opacity-100 md:group-hover:translate-y-0 ${index === 0 ? "max-w-lg" : "max-w-sm"}`}>
-                        {feature.description}
-                      </p>
-                    </div>
-                  </CardContent>
-                </Card>
-              </Tilt>
-            </Reveal>
+            <SolutionFeatureCard key={feature.title} feature={feature} index={index} />
           ))}
         </div>
 

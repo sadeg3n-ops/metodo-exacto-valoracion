@@ -73,7 +73,7 @@ export function Header({ onCtaClick }: HeaderProps) {
             <div className="hidden md:block">
               <Button
                 onClick={onCtaClick}
-                className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-6"
+                className="cta-glint bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-6"
               >
                 Reservar valoración
               </Button>

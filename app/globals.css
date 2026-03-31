@@ -119,6 +119,23 @@
   }
 }
 
+@keyframes cta-glint-sweep {
+  0%, 72%, 100% {
+    transform: translateX(-145%) skewX(-20deg);
+    opacity: 0;
+  }
+  76% {
+    opacity: 0;
+  }
+  82% {
+    opacity: 0.92;
+  }
+  90% {
+    transform: translateX(155%) skewX(-20deg);
+    opacity: 0;
+  }
+}
+
 .animate-text-gradient {
   background-size: 200% auto;
   animation: text-gradient 8s linear infinite;
@@ -142,6 +159,36 @@
 .animate-bridge-pulse {
   animation: bridge-pulse 2.2s ease-in-out infinite;
   will-change: transform, opacity, box-shadow;
+}
+
+.cta-glint {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.04) inset,
+    0 10px 26px rgba(234, 109, 31, 0.18),
+    0 0 22px rgba(30, 224, 255, 0.1);
+}
+
+.cta-glint::after {
+  content: "";
+  position: absolute;
+  inset: -35% auto -35% -28%;
+  width: 24%;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.12) 35%,
+    rgba(255, 255, 255, 0.62) 50%,
+    rgba(255, 255, 255, 0.14) 65%,
+    rgba(255, 255, 255, 0)
+  );
+  filter: blur(1px);
+  mix-blend-mode: screen;
+  transform: translateX(-145%) skewX(-20deg);
+  animation: cta-glint-sweep 4.8s ease-in-out infinite;
 }
 
 @theme inline {

@@ -1,16 +1,29 @@
 "use client"
 
-import { useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { motion, useSpring, useTransform } from "framer-motion"
 
 export function Tilt({ children, className = "" }: { children: React.ReactNode, className?: string }) {
   const ref = useRef<HTMLDivElement>(null)
+  const [isTouchDevice, setIsTouchDevice] = useState(false)
   
   const x = useSpring(0, { stiffness: 300, damping: 30 })
   const y = useSpring(0, { stiffness: 300, damping: 30 })
   
   const rotateX = useTransform(y, [-100, 100], [15, -15])
   const rotateY = useTransform(x, [-100, 100], [-15, 15])
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+
+    const mediaQuery = window.matchMedia("(hover: none), (pointer: coarse)")
+    const updateTouchState = () => setIsTouchDevice(mediaQuery.matches)
+
+    updateTouchState()
+    mediaQuery.addEventListener("change", updateTouchState)
+
+    return () => mediaQuery.removeEventListener("change", updateTouchState)
+  }, [])
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!ref.current) return
@@ -29,6 +42,10 @@ export function Tilt({ children, className = "" }: { children: React.ReactNode, 
   const handleMouseLeave = () => {
     x.set(0)
     y.set(0)
+  }
+
+  if (isTouchDevice) {
+    return <div className={`relative w-full h-full ${className}`}>{children}</div>
   }
 
   return (

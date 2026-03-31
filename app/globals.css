@@ -191,6 +191,12 @@
   animation: cta-glint-sweep 4.8s ease-in-out infinite;
 }
 
+.cta-glint-wide::after {
+  inset: -45% auto -45% -42%;
+  width: 36%;
+  filter: blur(1.5px);
+}
+
 @theme inline {
   --font-sans: var(--font-inter), 'Inter', system-ui, sans-serif;
   --font-mono: 'Geist Mono', 'Geist Mono Fallback';

@@ -64,7 +64,7 @@ export function HeroSection({ onCtaClick }: HeroSectionProps) {
                 <Button
                   onClick={onCtaClick}
                   size="lg"
-                  className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-lg px-8 py-7 rounded-xl group transition-all hover:scale-105"
+                  className="cta-glint cta-glint-wide bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-lg px-8 py-7 rounded-xl group transition-all hover:scale-105"
                 >
                   Reservar valoración
                   <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />

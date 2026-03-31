@@ -16,7 +16,7 @@ export function BeforeAfterSlider({
 }) {
   const [sliderPosition, setSliderPosition] = useState(50)
   const containerRef = useRef<HTMLDivElement>(null)
-  const activeLabel = sliderPosition >= 50 ? afterLabel : beforeLabel
+  const activeLabel = sliderPosition >= 50 ? beforeLabel : afterLabel
 
   const handleDrag = (e: React.MouseEvent | React.TouchEvent) => {
     if (!containerRef.current) return

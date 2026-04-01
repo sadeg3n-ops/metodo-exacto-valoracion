@@ -16,36 +16,79 @@ export function BeforeAfterSlider({
 }) {
   const [sliderPosition, setSliderPosition] = useState(50)
   const containerRef = useRef<HTMLDivElement>(null)
+  const touchStartRef = useRef<{ x: number; y: number } | null>(null)
+  const touchLockRef = useRef<"pending" | "horizontal" | "vertical" | null>(null)
   const activeLabel = sliderPosition >= 50 ? beforeLabel : afterLabel
 
-  const handleDrag = (e: React.MouseEvent | React.TouchEvent) => {
+  const updateSliderPosition = (clientX: number) => {
     if (!containerRef.current) return
     const rect = containerRef.current.getBoundingClientRect()
-    
-    let clientX = 0
-    if ("touches" in e) {
-      clientX = e.touches[0].clientX
-    } else {
-      clientX = (e as React.MouseEvent).clientX
-    }
-    
+
     const x = clientX - rect.left
     const percent = Math.min(Math.max((x / rect.width) * 100, 0), 100)
     setSliderPosition(percent)
   }
 
+  const handleMouseDrag = (e: React.MouseEvent) => {
+    updateSliderPosition(e.clientX)
+  }
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    const touch = e.touches[0]
+    touchStartRef.current = { x: touch.clientX, y: touch.clientY }
+    touchLockRef.current = "pending"
+    updateSliderPosition(touch.clientX)
+  }
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    const touch = e.touches[0]
+    const touchStart = touchStartRef.current
+
+    if (!touchStart) {
+      updateSliderPosition(touch.clientX)
+      return
+    }
+
+    const deltaX = touch.clientX - touchStart.x
+    const deltaY = touch.clientY - touchStart.y
+    const absX = Math.abs(deltaX)
+    const absY = Math.abs(deltaY)
+
+    if (touchLockRef.current === "pending") {
+      if (absX > 10 && absX > absY + 6) {
+        touchLockRef.current = "horizontal"
+      } else if (absY > 10 && absY > absX + 6) {
+        touchLockRef.current = "vertical"
+      }
+    }
+
+    if (touchLockRef.current === "vertical") {
+      return
+    }
+
+    e.preventDefault()
+    updateSliderPosition(touch.clientX)
+  }
+
+  const handleTouchEnd = () => {
+    touchStartRef.current = null
+    touchLockRef.current = null
+  }
+
   return (
     <div 
       ref={containerRef}
-      className="relative w-full aspect-[4/5] sm:aspect-[3/4] max-w-xl mx-auto rounded-xl overflow-hidden cursor-ew-resize select-none border border-border group touch-pan-y"
+      className="relative w-full aspect-[4/5] sm:aspect-[3/4] max-w-xl mx-auto rounded-xl overflow-hidden cursor-ew-resize select-none border border-border group touch-pan-x"
       onMouseMove={(e) => {
-        if (e.buttons === 1) handleDrag(e)
+        if (e.buttons === 1) handleMouseDrag(e)
       }}
-      onTouchStart={handleDrag}
-      onTouchMove={handleDrag}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+      onTouchCancel={handleTouchEnd}
       onMouseDown={(e) => {
         e.preventDefault() // Prevent text selection and other default browser behaviors
-        handleDrag(e)
+        handleMouseDrag(e)
       }}
     >
       {/* Before Image */}

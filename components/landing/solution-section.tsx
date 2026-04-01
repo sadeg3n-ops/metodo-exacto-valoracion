@@ -17,10 +17,10 @@ const features = [
     imagePosition: "center center",
   },
   {
-    title: "Nutrición sostenible",
+    title: "Nutrición flexible",
     subtitle: "Comer bien sin complicarte",
     description: "Objetivos claros, pautas flexibles y margen para comer fuera sin cortar el progreso.",
-    image: "/images/process/nutricion-sostenible.png",
+    image: "/images/process/nutricion-flexible.jpg",
     imagePosition: "center center",
   },
   {

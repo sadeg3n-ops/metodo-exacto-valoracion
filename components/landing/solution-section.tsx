@@ -41,18 +41,26 @@ function SolutionFeatureCard({
 }) {
   const ref = useRef<HTMLDivElement>(null)
   const [isMobileViewport, setIsMobileViewport] = useState(false)
+  const [mobileExpanded, setMobileExpanded] = useState<boolean | null>(null)
   const isInView = useInView(ref, {
     once: false,
     amount: 0.65,
     margin: "-10% 0px -20% 0px",
   })
-  const isMobileActive = isMobileViewport && isInView
+  const isMobileActive = isMobileViewport && (mobileExpanded ?? isInView)
 
   useEffect(() => {
     if (typeof window === "undefined") return
 
     const mediaQuery = window.matchMedia("(max-width: 767px)")
-    const updateViewport = () => setIsMobileViewport(mediaQuery.matches)
+    const updateViewport = () => {
+      const isMobile = mediaQuery.matches
+      setIsMobileViewport(isMobile)
+
+      if (!isMobile) {
+        setMobileExpanded(null)
+      }
+    }
 
     updateViewport()
     mediaQuery.addEventListener("change", updateViewport)
@@ -69,6 +77,19 @@ function SolutionFeatureCard({
       <Tilt className="h-full">
         <Card
           ref={ref}
+          role={isMobileViewport ? "button" : undefined}
+          tabIndex={isMobileViewport ? 0 : undefined}
+          onClick={isMobileViewport ? () => setMobileExpanded((current) => !(current ?? isInView)) : undefined}
+          onKeyDown={
+            isMobileViewport
+              ? (event) => {
+                  if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault()
+                    setMobileExpanded((current) => !(current ?? isInView))
+                  }
+                }
+              : undefined
+          }
           className="group relative h-full overflow-hidden border-border/70 bg-card/30 hover:border-primary/60 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10"
         >
           <div

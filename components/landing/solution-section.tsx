@@ -64,7 +64,7 @@ function SolutionFeatureCard({
     <Reveal
       key={feature.title}
       delay={0.3 + index * 0.15}
-      className={index === 0 ? "lg:col-span-2 lg:row-span-2" : ""}
+      className="h-full"
     >
       <Tilt className="h-full">
         <Card
@@ -105,23 +105,18 @@ function SolutionFeatureCard({
             )}
           />
 
-          <CardContent
-            className={cn(
-              "relative z-10 flex h-full flex-col justify-end p-6 text-left md:p-8",
-              index === 0 ? "md:p-12" : "",
-            )}
-          >
-            <div className="max-w-xl">
-              <h3 className={cn("font-semibold text-white mb-2", index === 0 ? "text-3xl md:text-4xl" : "text-2xl")}>
+          <CardContent className="relative z-10 flex h-full flex-col justify-end p-6 text-left md:p-8">
+            <div className="max-w-sm">
+              <h3 className="mb-2 text-2xl font-semibold text-white">
                 {feature.title}
               </h3>
-              <p className={cn("text-primary font-semibold tracking-wide", index === 0 ? "text-lg md:text-xl" : "text-base")}>
+              <p className="text-base font-semibold tracking-wide text-primary">
                 {feature.subtitle}
               </p>
               <div
                 className={cn(
                   "grid transition-[grid-template-rows,opacity,margin-top] duration-350 ease-out will-change-[opacity]",
-                  index === 0 ? "max-w-lg" : "max-w-sm",
+                  "max-w-sm",
                   isMobileActive
                     ? "mt-4 grid-rows-[1fr] opacity-100"
                     : "mt-2 grid-rows-[0fr] opacity-0 md:group-hover:mt-4 md:group-hover:grid-rows-[1fr] md:group-hover:opacity-100",
@@ -171,7 +166,7 @@ export function SolutionSection() {
           </Reveal>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3 max-w-5xl mx-auto md:auto-rows-fr">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3 max-w-5xl mx-auto auto-rows-fr">
           {features.map((feature, index) => (
             <SolutionFeatureCard
               key={feature.title}

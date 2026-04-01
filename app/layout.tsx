@@ -39,8 +39,8 @@ export const metadata: Metadata = {
     images: [socialPreviewUrl],
   },
   icons: {
-    icon: "/icon.svg",
-    apple: "/apple-icon.png",
+    icon: "/exact-method-favicon.svg",
+    apple: "/exact-method-apple-icon.png",
   },
 }
 

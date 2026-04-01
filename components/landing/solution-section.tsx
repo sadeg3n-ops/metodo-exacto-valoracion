@@ -1,8 +1,7 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import { ChevronDown } from "lucide-react"
-import { useInView } from "framer-motion"
 import { Card, CardContent } from "@/components/ui/card"
 import { Reveal } from "@/components/ui/reveal"
 import { Tilt } from "@/components/ui/tilt"
@@ -43,14 +42,8 @@ function SolutionFeatureCard({
   isMobileOpen: boolean
   onMobileToggle: () => void
 }) {
-  const ref = useRef<HTMLDivElement>(null)
   const [isMobileViewport, setIsMobileViewport] = useState(false)
-  const isInView = useInView(ref, {
-    once: false,
-    amount: 0.65,
-    margin: "-10% 0px -20% 0px",
-  })
-  const isMobileActive = isMobileViewport && (isMobileOpen || isInView)
+  const isMobileActive = isMobileViewport && isMobileOpen
 
   useEffect(() => {
     if (typeof window === "undefined") return
@@ -75,7 +68,6 @@ function SolutionFeatureCard({
     >
       <Tilt className="h-full">
         <Card
-          ref={ref}
           role={isMobileViewport ? "button" : undefined}
           tabIndex={isMobileViewport ? 0 : undefined}
           onClick={isMobileViewport ? onMobileToggle : undefined}
@@ -89,10 +81,10 @@ function SolutionFeatureCard({
                 }
               : undefined
           }
-          className="group relative h-full overflow-hidden border-border/70 bg-card/30 hover:border-primary/60 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10"
+          className="group relative h-full overflow-hidden border-border/70 bg-card/30 transition-[border-color,box-shadow] duration-300 ease-out hover:border-primary/55 hover:shadow-xl hover:shadow-primary/8"
         >
           <div
-            className="absolute inset-0 scale-100 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+            className="absolute inset-0 bg-cover bg-center transition-transform duration-500 ease-out md:group-hover:scale-[1.03]"
             style={{
               backgroundImage: `url('${feature.image}')`,
               backgroundPosition: feature.imagePosition,
@@ -100,13 +92,13 @@ function SolutionFeatureCard({
           />
           <div
             className={cn(
-              "absolute inset-0 transition-colors duration-500 md:bg-black/45 md:group-hover:bg-black/80",
+              "absolute inset-0 transition-colors duration-300 ease-out md:bg-black/45 md:group-hover:bg-black/72",
               isMobileActive ? "bg-black/72" : "bg-black/42",
             )}
           />
           <div
             className={cn(
-              "absolute inset-0 transition-all duration-500 md:bg-gradient-to-t md:from-black/90 md:via-black/45 md:to-black/20 md:group-hover:from-black/95 md:group-hover:via-black/80 md:group-hover:to-black/55",
+              "absolute inset-0 transition-opacity duration-300 ease-out md:bg-gradient-to-t md:from-black/90 md:via-black/45 md:to-black/20 md:group-hover:from-black/95 md:group-hover:via-black/78 md:group-hover:to-black/50",
               isMobileActive
                 ? "bg-gradient-to-t from-black/96 via-black/78 to-black/34"
                 : "bg-gradient-to-t from-black/88 via-black/44 to-black/16",
@@ -128,7 +120,7 @@ function SolutionFeatureCard({
               </p>
               <div
                 className={cn(
-                  "grid transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]",
+                  "grid transition-[grid-template-rows,opacity,margin-top] duration-350 ease-out will-change-[opacity]",
                   index === 0 ? "max-w-lg" : "max-w-sm",
                   isMobileActive
                     ? "mt-4 grid-rows-[1fr] opacity-100"
@@ -137,7 +129,7 @@ function SolutionFeatureCard({
               >
                 <p
                   className={cn(
-                    "min-h-0 overflow-hidden text-sm md:text-base leading-relaxed text-slate-300 transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]",
+                    "min-h-0 overflow-hidden text-sm md:text-base leading-relaxed text-slate-300 transition-[opacity,transform] duration-300 ease-out will-change-[opacity,transform]",
                     isMobileActive ? "translate-y-0" : "translate-y-3 md:group-hover:translate-y-0",
                   )}
                 >

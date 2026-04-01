@@ -20,8 +20,8 @@ export function HeroSection({ onCtaClick }: HeroSectionProps) {
       <div className="absolute inset-0 bg-background/58 md:bg-background/48" />
       <div className="absolute inset-0 bg-gradient-to-b from-background/52 via-background/28 to-background/82" />
       <div className="absolute inset-0 bg-gradient-to-r from-background/22 via-transparent to-background/22" />
-      <div className="absolute top-1/4 -left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" />
-      <div className="absolute bottom-1/4 -right-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1s" }} />
+      <div className="hero-orb absolute top-1/4 -left-1/4 h-96 w-96 rounded-full bg-primary/10 blur-3xl" />
+      <div className="hero-orb hero-orb-delayed absolute bottom-1/4 -right-1/4 h-96 w-96 rounded-full bg-primary/10 blur-3xl" />
 
       <div
         className="absolute inset-0 opacity-[0.02]"
@@ -102,7 +102,7 @@ export function HeroSection({ onCtaClick }: HeroSectionProps) {
         </div>
       </div>
 
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+      <div className="hero-scroll-indicator absolute bottom-8 left-1/2 -translate-x-1/2">
         <div className="w-6 h-10 rounded-full border-2 border-muted-foreground/30 flex items-start justify-center p-2">
           <div className="w-1 h-2 bg-muted-foreground/50 rounded-full" />
         </div>

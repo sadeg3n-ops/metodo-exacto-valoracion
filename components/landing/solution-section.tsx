@@ -35,19 +35,22 @@ const features = [
 function SolutionFeatureCard({
   feature,
   index,
+  isMobileOpen,
+  onMobileToggle,
 }: {
   feature: (typeof features)[number]
   index: number
+  isMobileOpen: boolean
+  onMobileToggle: () => void
 }) {
   const ref = useRef<HTMLDivElement>(null)
   const [isMobileViewport, setIsMobileViewport] = useState(false)
-  const [mobileExpanded, setMobileExpanded] = useState<boolean | null>(null)
   const isInView = useInView(ref, {
     once: false,
     amount: 0.65,
     margin: "-10% 0px -20% 0px",
   })
-  const isMobileActive = isMobileViewport && (mobileExpanded ?? isInView)
+  const isMobileActive = isMobileViewport && (isMobileOpen || isInView)
 
   useEffect(() => {
     if (typeof window === "undefined") return
@@ -56,10 +59,6 @@ function SolutionFeatureCard({
     const updateViewport = () => {
       const isMobile = mediaQuery.matches
       setIsMobileViewport(isMobile)
-
-      if (!isMobile) {
-        setMobileExpanded(null)
-      }
     }
 
     updateViewport()
@@ -79,13 +78,13 @@ function SolutionFeatureCard({
           ref={ref}
           role={isMobileViewport ? "button" : undefined}
           tabIndex={isMobileViewport ? 0 : undefined}
-          onClick={isMobileViewport ? () => setMobileExpanded((current) => !(current ?? isInView)) : undefined}
+          onClick={isMobileViewport ? onMobileToggle : undefined}
           onKeyDown={
             isMobileViewport
               ? (event) => {
                   if (event.key === "Enter" || event.key === " ") {
                     event.preventDefault()
-                    setMobileExpanded((current) => !(current ?? isInView))
+                    onMobileToggle()
                   }
                 }
               : undefined
@@ -154,6 +153,8 @@ function SolutionFeatureCard({
 }
 
 export function SolutionSection() {
+  const [mobileOpenIndex, setMobileOpenIndex] = useState<number | null>(null)
+
   return (
     <section id="resultados" className="pt-16 pb-12 md:py-28 bg-background relative overflow-hidden">
       <div className="absolute top-0 left-1/4 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
@@ -180,7 +181,13 @@ export function SolutionSection() {
 
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3 max-w-5xl mx-auto md:auto-rows-fr">
           {features.map((feature, index) => (
-            <SolutionFeatureCard key={feature.title} feature={feature} index={index} />
+            <SolutionFeatureCard
+              key={feature.title}
+              feature={feature}
+              index={index}
+              isMobileOpen={mobileOpenIndex === index}
+              onMobileToggle={() => setMobileOpenIndex((current) => (current === index ? null : index))}
+            />
           ))}
         </div>
 

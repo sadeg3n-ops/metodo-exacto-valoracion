@@ -11,6 +11,7 @@ import { GuaranteeSection } from "@/components/landing/guarantee-section"
 import { FaqSection } from "@/components/landing/faq-section"
 import { FooterSection } from "@/components/landing/footer-section"
 import { CtaModal } from "@/components/landing/cta-modal"
+import { SectionBridge } from "@/components/ui/section-bridge"
 
 declare global {
   interface Window {
@@ -54,10 +55,15 @@ export default function MetodoExactoLandingPage() {
       <main>
         <HeroSection onCtaClick={openModal} />
         <ProblemSection />
+        <SectionBridge />
         <SolutionSection />
+        <SectionBridge />
         <TestimonialsSection />
+        <SectionBridge compact />
         <PricingSection onCtaClick={openModal} />
+        <SectionBridge compact />
         <GuaranteeSection />
+        <SectionBridge compact />
         <FaqSection />
       </main>
 

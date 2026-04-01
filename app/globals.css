@@ -119,6 +119,87 @@
   }
 }
 
+@keyframes section-bridge-breathe {
+  0%, 100% {
+    opacity: 0.55;
+    transform: translateX(-50%) scale(0.92);
+    box-shadow:
+      0 0 0 0 rgba(234, 109, 31, 0.18),
+      0 0 18px rgba(234, 109, 31, 0.16);
+  }
+  50% {
+    opacity: 0.95;
+    transform: translateX(-50%) scale(1.08);
+    box-shadow:
+      0 0 0 12px rgba(234, 109, 31, 0),
+      0 0 28px rgba(234, 109, 31, 0.22);
+  }
+}
+
+@keyframes section-bridge-drift {
+  0% {
+    opacity: 0.15;
+    transform: translateX(-42%) scaleX(0.72);
+  }
+  50% {
+    opacity: 0.55;
+    transform: translateX(42%) scaleX(1);
+  }
+  100% {
+    opacity: 0.15;
+    transform: translateX(-42%) scaleX(0.72);
+  }
+}
+
+@keyframes section-bridge-aura {
+  0%, 100% {
+    opacity: 0.38;
+    transform: translateX(-50%) translateY(-50%) scale(0.94);
+    filter: blur(16px);
+  }
+  50% {
+    opacity: 0.78;
+    transform: translateX(-50%) translateY(-50%) scale(1.08);
+    filter: blur(20px);
+  }
+}
+
+@keyframes section-bridge-orbit {
+  0% {
+    transform: rotate(0deg) scale(0.96);
+    opacity: 0.35;
+  }
+  50% {
+    transform: rotate(180deg) scale(1.06);
+    opacity: 0.7;
+  }
+  100% {
+    transform: rotate(360deg) scale(0.96);
+    opacity: 0.35;
+  }
+}
+
+@keyframes section-bridge-comet {
+  0% {
+    opacity: 0;
+    transform: translateX(-180%) scaleX(0.72);
+  }
+  18% {
+    opacity: 0.85;
+  }
+  50% {
+    opacity: 0.32;
+    transform: translateX(0%) scaleX(1);
+  }
+  82% {
+    opacity: 0.85;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(180%) scaleX(0.72);
+  }
+}
+
 @keyframes cta-glint-sweep {
   0%, 72%, 100% {
     transform: translateX(-145%) skewX(-20deg);
@@ -159,6 +240,92 @@
 .animate-bridge-pulse {
   animation: bridge-pulse 2.2s ease-in-out infinite;
   will-change: transform, opacity, box-shadow;
+}
+
+.section-bridge-wave {
+  background: linear-gradient(
+    90deg,
+    rgba(234, 109, 31, 0),
+    rgba(234, 109, 31, 0.16) 22%,
+    rgba(255, 198, 148, 0.72) 50%,
+    rgba(234, 109, 31, 0.16) 78%,
+    rgba(234, 109, 31, 0)
+  );
+  filter: blur(0.6px);
+  animation: section-bridge-drift 5.6s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.section-bridge-line {
+  background: linear-gradient(
+    90deg,
+    rgba(234, 109, 31, 0),
+    rgba(234, 109, 31, 0.18) 20%,
+    rgba(255, 212, 178, 0.42) 50%,
+    rgba(234, 109, 31, 0.18) 80%,
+    rgba(234, 109, 31, 0)
+  );
+  box-shadow: 0 0 18px rgba(234, 109, 31, 0.12);
+}
+
+.section-bridge-spark {
+  position: absolute;
+  top: 50%;
+  width: min(14vw, 7rem);
+  height: 2px;
+  border-radius: 999px;
+  transform: translateY(-50%);
+  background: linear-gradient(
+    90deg,
+    rgba(234, 109, 31, 0),
+    rgba(255, 206, 163, 0.95) 45%,
+    rgba(234, 109, 31, 0)
+  );
+  filter: blur(1px);
+  opacity: 0;
+  animation: section-bridge-comet 4.6s ease-in-out infinite;
+}
+
+.section-bridge-spark-left {
+  left: calc(50% - min(28vw, 12rem));
+}
+
+.section-bridge-spark-right {
+  right: calc(50% - min(28vw, 12rem));
+  animation-delay: 2.3s;
+}
+
+.section-bridge-aura {
+  background:
+    radial-gradient(ellipse at center, rgba(234, 109, 31, 0.24) 0%, rgba(234, 109, 31, 0.12) 28%, rgba(234, 109, 31, 0.04) 58%, transparent 100%);
+  animation: section-bridge-aura 4.8s ease-in-out infinite;
+}
+
+.section-bridge-halo {
+  background:
+    radial-gradient(circle, rgba(255, 197, 143, 0.32) 0%, rgba(234, 109, 31, 0.14) 34%, rgba(234, 109, 31, 0.02) 68%, transparent 100%);
+  filter: blur(7px);
+}
+
+.section-bridge-ring {
+  border: 1px solid rgba(255, 202, 157, 0.16);
+  box-shadow:
+    inset 0 0 0 1px rgba(234, 109, 31, 0.06),
+    0 0 24px rgba(234, 109, 31, 0.1);
+  animation: section-bridge-orbit 7s linear infinite;
+}
+
+.section-bridge-beam {
+  background: linear-gradient(
+    180deg,
+    rgba(234, 109, 31, 0),
+    rgba(255, 214, 180, 0.78) 45%,
+    rgba(234, 109, 31, 0)
+  );
+  box-shadow:
+    0 0 18px rgba(234, 109, 31, 0.22),
+    0 0 36px rgba(234, 109, 31, 0.1);
+  animation: section-bridge-breathe 3.2s ease-in-out infinite;
 }
 
 .cta-glint {

@@ -106,18 +106,24 @@ function SolutionFeatureCard({
               <p className={cn("text-primary font-semibold tracking-wide", index === 0 ? "text-lg md:text-xl" : "text-base")}>
                 {feature.subtitle}
               </p>
-              <p
+              <div
                 className={cn(
-                  "mt-4 text-sm md:text-base leading-relaxed transition-all duration-500",
+                  "grid transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]",
                   index === 0 ? "max-w-lg" : "max-w-sm",
-                  "md:max-h-0 md:overflow-hidden md:text-slate-300 md:opacity-0 md:translate-y-4 md:group-hover:max-h-40 md:group-hover:overflow-visible md:group-hover:opacity-100 md:group-hover:translate-y-0",
                   isMobileActive
-                    ? "max-h-40 opacity-100 translate-y-0 text-slate-300"
-                    : "max-h-0 opacity-0 translate-y-3 overflow-hidden text-slate-300/0",
+                    ? "mt-4 grid-rows-[1fr] opacity-100"
+                    : "mt-2 grid-rows-[0fr] opacity-0 md:group-hover:mt-4 md:group-hover:grid-rows-[1fr] md:group-hover:opacity-100",
                 )}
               >
-                {feature.description}
-              </p>
+                <p
+                  className={cn(
+                    "min-h-0 overflow-hidden text-sm md:text-base leading-relaxed text-slate-300 transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]",
+                    isMobileActive ? "translate-y-0" : "translate-y-3 md:group-hover:translate-y-0",
+                  )}
+                >
+                  {feature.description}
+                </p>
+              </div>
             </div>
           </CardContent>
         </Card>

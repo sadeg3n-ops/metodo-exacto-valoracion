@@ -79,7 +79,7 @@ function SolutionFeatureCard({
               }
             : undefined
         }
-        className="group relative h-full overflow-hidden border-border/70 bg-card/30 transition-colors duration-200 ease-out hover:border-primary/45"
+        className="group relative h-full min-h-[18.5rem] overflow-hidden border-border/70 bg-card/30 transition-colors duration-200 ease-out hover:border-primary/45 md:min-h-[20rem]"
       >
         <div
           className="absolute inset-0 bg-cover bg-center"
@@ -90,10 +90,10 @@ function SolutionFeatureCard({
         />
         <div
           className={cn(
-            "absolute inset-0 bg-gradient-to-t transition-opacity duration-200 ease-out md:from-black/88 md:via-black/48 md:to-black/24 md:group-hover:from-black/92 md:group-hover:via-black/62 md:group-hover:to-black/36",
-            isMobileActive
-              ? "from-black/94 via-black/68 to-black/34"
-              : "from-black/88 via-black/46 to-black/20",
+            "absolute inset-0 bg-gradient-to-t transition-opacity duration-200 ease-out",
+            isMobileViewport
+              ? "from-black/90 via-black/58 to-black/28"
+              : "from-black/88 via-black/46 to-black/20 md:group-hover:from-black/92 md:group-hover:via-black/62 md:group-hover:to-black/36",
           )}
         />
 
@@ -107,13 +107,19 @@ function SolutionFeatureCard({
             </p>
             <div
               className={cn(
-                "max-w-sm overflow-hidden transition-[max-height,opacity,margin-top] duration-200 ease-out",
-                isMobileActive
-                  ? "mt-4 max-h-32 opacity-100"
-                  : "mt-2 max-h-0 opacity-0 md:group-hover:mt-4 md:group-hover:max-h-32 md:group-hover:opacity-100",
+                "mt-4 h-[4.75rem] max-w-sm overflow-hidden",
               )}
             >
-              <p className="text-sm leading-relaxed text-slate-300 md:text-base">
+              <p
+                className={cn(
+                  "text-sm leading-relaxed text-slate-300 transition-opacity duration-200 ease-out md:text-base",
+                  isMobileViewport
+                    ? isMobileActive
+                      ? "opacity-100"
+                      : "opacity-0"
+                    : "opacity-0 md:group-hover:opacity-100",
+                )}
+              >
                 {feature.description}
               </p>
             </div>

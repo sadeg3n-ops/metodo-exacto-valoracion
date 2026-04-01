@@ -4,7 +4,6 @@ import { useEffect, useState } from "react"
 import { ChevronDown } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Reveal } from "@/components/ui/reveal"
-import { Tilt } from "@/components/ui/tilt"
 import { cn } from "@/lib/utils"
 
 const features = [
@@ -66,75 +65,61 @@ function SolutionFeatureCard({
       delay={0.3 + index * 0.15}
       className="h-full"
     >
-      <Tilt className="h-full">
-        <Card
-          role={isMobileViewport ? "button" : undefined}
-          tabIndex={isMobileViewport ? 0 : undefined}
-          onClick={isMobileViewport ? onMobileToggle : undefined}
-          onKeyDown={
-            isMobileViewport
-              ? (event) => {
-                  if (event.key === "Enter" || event.key === " ") {
-                    event.preventDefault()
-                    onMobileToggle()
-                  }
+      <Card
+        role={isMobileViewport ? "button" : undefined}
+        tabIndex={isMobileViewport ? 0 : undefined}
+        onClick={isMobileViewport ? onMobileToggle : undefined}
+        onKeyDown={
+          isMobileViewport
+            ? (event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault()
+                  onMobileToggle()
                 }
-              : undefined
-          }
-          className="group relative h-full overflow-hidden border-border/70 bg-card/30 transition-[border-color,box-shadow] duration-300 ease-out hover:border-primary/55 hover:shadow-xl hover:shadow-primary/8"
-        >
-          <div
-            className="absolute inset-0 bg-cover bg-center transition-transform duration-500 ease-out md:group-hover:scale-[1.03]"
-            style={{
-              backgroundImage: `url('${feature.image}')`,
-              backgroundPosition: feature.imagePosition,
-            }}
-          />
-          <div
-            className={cn(
-              "absolute inset-0 transition-colors duration-300 ease-out md:bg-black/45 md:group-hover:bg-black/72",
-              isMobileActive ? "bg-black/72" : "bg-black/42",
-            )}
-          />
-          <div
-            className={cn(
-              "absolute inset-0 transition-opacity duration-300 ease-out md:bg-gradient-to-t md:from-black/90 md:via-black/45 md:to-black/20 md:group-hover:from-black/95 md:group-hover:via-black/78 md:group-hover:to-black/50",
-              isMobileActive
-                ? "bg-gradient-to-t from-black/96 via-black/78 to-black/34"
-                : "bg-gradient-to-t from-black/88 via-black/44 to-black/16",
-            )}
-          />
+              }
+            : undefined
+        }
+        className="group relative h-full overflow-hidden border-border/70 bg-card/30 transition-colors duration-200 ease-out hover:border-primary/45"
+      >
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage: `url('${feature.image}')`,
+            backgroundPosition: feature.imagePosition,
+          }}
+        />
+        <div
+          className={cn(
+            "absolute inset-0 bg-gradient-to-t transition-opacity duration-200 ease-out md:from-black/88 md:via-black/48 md:to-black/24 md:group-hover:from-black/92 md:group-hover:via-black/62 md:group-hover:to-black/36",
+            isMobileActive
+              ? "from-black/94 via-black/68 to-black/34"
+              : "from-black/88 via-black/46 to-black/20",
+          )}
+        />
 
-          <CardContent className="relative z-10 flex h-full flex-col justify-end p-6 text-left md:p-8">
-            <div className="max-w-sm">
-              <h3 className="mb-2 text-2xl font-semibold text-white">
-                {feature.title}
-              </h3>
-              <p className="text-base font-semibold tracking-wide text-primary">
-                {feature.subtitle}
+        <CardContent className="relative z-10 flex h-full flex-col justify-end p-6 text-left md:p-8">
+          <div className="max-w-sm">
+            <h3 className="mb-2 text-2xl font-semibold text-white">
+              {feature.title}
+            </h3>
+            <p className="text-base font-semibold tracking-wide text-primary">
+              {feature.subtitle}
+            </p>
+            <div
+              className={cn(
+                "max-w-sm overflow-hidden transition-[max-height,opacity,margin-top] duration-200 ease-out",
+                isMobileActive
+                  ? "mt-4 max-h-32 opacity-100"
+                  : "mt-2 max-h-0 opacity-0 md:group-hover:mt-4 md:group-hover:max-h-32 md:group-hover:opacity-100",
+              )}
+            >
+              <p className="text-sm leading-relaxed text-slate-300 md:text-base">
+                {feature.description}
               </p>
-              <div
-                className={cn(
-                  "grid transition-[grid-template-rows,opacity,margin-top] duration-350 ease-out will-change-[opacity]",
-                  "max-w-sm",
-                  isMobileActive
-                    ? "mt-4 grid-rows-[1fr] opacity-100"
-                    : "mt-2 grid-rows-[0fr] opacity-0 md:group-hover:mt-4 md:group-hover:grid-rows-[1fr] md:group-hover:opacity-100",
-                )}
-              >
-                <p
-                  className={cn(
-                    "min-h-0 overflow-hidden text-sm md:text-base leading-relaxed text-slate-300 transition-[opacity,transform] duration-300 ease-out will-change-[opacity,transform]",
-                    isMobileActive ? "translate-y-0" : "translate-y-3 md:group-hover:translate-y-0",
-                  )}
-                >
-                  {feature.description}
-                </p>
-              </div>
             </div>
-          </CardContent>
-        </Card>
-      </Tilt>
+          </div>
+        </CardContent>
+      </Card>
     </Reveal>
   )
 }

@@ -110,7 +110,7 @@ function SolutionFeatureCard({
                 className={cn(
                   "mt-4 text-sm md:text-base leading-relaxed transition-all duration-500",
                   index === 0 ? "max-w-lg" : "max-w-sm",
-                  "md:text-slate-300 md:opacity-0 md:translate-y-4 md:group-hover:opacity-100 md:group-hover:translate-y-0",
+                  "md:max-h-0 md:overflow-hidden md:text-slate-300 md:opacity-0 md:translate-y-4 md:group-hover:max-h-40 md:group-hover:overflow-visible md:group-hover:opacity-100 md:group-hover:translate-y-0",
                   isMobileActive
                     ? "max-h-40 opacity-100 translate-y-0 text-slate-300"
                     : "max-h-0 opacity-0 translate-y-3 overflow-hidden text-slate-300/0",

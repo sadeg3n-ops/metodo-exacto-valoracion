@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useRef } from "react"
-import { motion } from "framer-motion"
+import Image from "next/image"
 
 export function BeforeAfterSlider({ 
   beforeImage, 
@@ -37,10 +37,11 @@ export function BeforeAfterSlider({
   return (
     <div 
       ref={containerRef}
-      className="relative w-full aspect-[4/5] sm:aspect-[3/4] max-w-xl mx-auto rounded-xl overflow-hidden cursor-ew-resize select-none border border-border group touch-none"
+      className="relative w-full aspect-[4/5] sm:aspect-[3/4] max-w-xl mx-auto rounded-xl overflow-hidden cursor-ew-resize select-none border border-border group touch-pan-y"
       onMouseMove={(e) => {
         if (e.buttons === 1) handleDrag(e)
       }}
+      onTouchStart={handleDrag}
       onTouchMove={handleDrag}
       onMouseDown={(e) => {
         e.preventDefault() // Prevent text selection and other default browser behaviors
@@ -50,12 +51,14 @@ export function BeforeAfterSlider({
       {/* Before Image */}
       <div className="absolute inset-0 w-full h-full bg-muted pointer-events-none">
         <div className="w-full h-full bg-secondary/40" />
-        <img 
+        <Image
           src={beforeImage} 
-          className="absolute inset-0 w-full h-full object-cover" 
+          fill
+          sizes="(max-width: 768px) 92vw, 640px"
+          className="absolute inset-0 h-full w-full object-cover"
           alt={beforeLabel} 
           draggable="false"
-          onError={(e) => e.currentTarget.style.display = 'none'}
+          loading="lazy"
         />
       </div>
 
@@ -67,39 +70,33 @@ export function BeforeAfterSlider({
         }}
       >
         <div className="absolute inset-0 w-full h-full bg-primary/5" />
-        <img 
+        <Image
           src={afterImage} 
-          className="absolute inset-0 w-full h-full object-cover" 
+          fill
+          sizes="(max-width: 768px) 92vw, 640px"
+          className="absolute inset-0 h-full w-full object-cover"
           alt={afterLabel} 
           draggable="false"
-          onError={(e) => e.currentTarget.style.display = 'none'}
+          loading="lazy"
         />
         {/* Border line */}
         <div className="absolute left-0 top-0 bottom-0 w-[4px] bg-primary shadow-[0_0_10px_rgba(0,0,0,0.5)]" />
       </div>
 
-      <motion.div
-        className="absolute top-4 left-1/2 -translate-x-1/2 rounded-full border border-white/20 bg-black/55 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-white backdrop-blur-md pointer-events-none z-20"
-        key={activeLabel}
-        initial={{ opacity: 0.6, y: -4 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.18, ease: "easeOut" }}
-      >
+      <div className="absolute top-4 left-1/2 -translate-x-1/2 rounded-full border border-white/20 bg-black/55 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-white backdrop-blur-md pointer-events-none z-20 transition-all duration-150 ease-out">
         {activeLabel}
-      </motion.div>
+      </div>
 
       {/* Slider Handle */}
-      <motion.div 
-        className="absolute top-1/2 -translate-y-1/2 w-10 h-10 bg-primary rounded-full shadow-xl flex items-center justify-center pointer-events-none opacity-80 group-hover:opacity-100 transition-opacity border-2 border-background z-20"
-        style={{ left: `calc(${sliderPosition}% - 20px)` }}
-        animate={{ scale: [1, 1.1, 1] }}
-        transition={{ duration: 2, repeat: Infinity }}
+      <div 
+        className="absolute top-1/2 h-10 w-10 -translate-y-1/2 rounded-full border-2 border-background bg-primary shadow-xl flex items-center justify-center pointer-events-none opacity-90 group-hover:opacity-100 transition-opacity z-20"
+        style={{ left: `${sliderPosition}%`, transform: "translate(-50%, -50%)" }}
       >
         <div className="flex gap-1">
           <div className="w-1.5 h-4 bg-primary-foreground rounded-full" />
           <div className="w-1.5 h-4 bg-primary-foreground rounded-full" />
         </div>
-      </motion.div>
+      </div>
     </div>
   )
 }

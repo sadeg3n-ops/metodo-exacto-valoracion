@@ -46,6 +46,9 @@ function SolutionFeatureCard({
 }) {
   const [isMobileViewport, setIsMobileViewport] = useState(false)
   const isMobileActive = isMobileViewport && isMobileOpen
+  const subtitleTextStyle = {
+    textShadow: "0 1px 2px rgba(0,0,0,0.55), 0 0 16px rgba(234,109,31,0.12)",
+  } as const
 
   useEffect(() => {
     if (typeof window === "undefined") return
@@ -97,14 +100,29 @@ function SolutionFeatureCard({
             feature.overlayClass,
           )}
         />
+        <div
+          className="absolute inset-0 opacity-90"
+          style={{
+            background:
+              "radial-gradient(circle at 22% 78%, rgba(0,0,0,0.34) 0%, rgba(0,0,0,0.18) 28%, rgba(0,0,0,0) 58%)",
+          }}
+        />
 
         <CardContent className="relative z-10 flex h-full flex-col justify-end p-6 text-left md:p-8">
           <div className="max-w-sm">
-            <h3 className="mb-2 text-2xl font-semibold text-white">
+            <h3
+              className="mb-2 text-2xl font-semibold text-white"
+              style={{ textShadow: "0 2px 10px rgba(0,0,0,0.45)" }}
+            >
               {feature.title}
             </h3>
-            <p className="text-base font-semibold tracking-wide text-primary">
-              {feature.subtitle}
+            <p className="leading-[1.15]">
+              <span
+                className="inline-flex max-w-full rounded-md bg-black/26 px-2.5 py-1 text-base font-semibold tracking-[0.01em] text-primary ring-1 ring-white/6 backdrop-blur-[2px]"
+                style={subtitleTextStyle}
+              >
+                {feature.subtitle}
+              </span>
             </p>
             <div
               className={cn(

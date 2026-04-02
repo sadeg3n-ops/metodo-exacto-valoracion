@@ -108,15 +108,15 @@ function SolutionFeatureCard({
           }}
         />
 
-        <CardContent className="relative z-10 flex h-full flex-col justify-end p-6 text-left md:p-8">
-          <div className="max-w-sm">
+        <CardContent className="relative z-10 flex h-full flex-col justify-end p-6 text-center md:p-8">
+          <div className="mx-auto max-w-sm">
             <h3
               className="mb-2 text-2xl font-semibold text-white"
               style={{ textShadow: "0 2px 10px rgba(0,0,0,0.45)" }}
             >
               {feature.title}
             </h3>
-            <p className="leading-[1.15]">
+            <p className="flex justify-center leading-[1.15]">
               <span
                 className="inline-flex max-w-full rounded-md bg-black/26 px-2.5 py-1 text-base font-semibold tracking-[0.01em] text-primary ring-1 ring-white/6 backdrop-blur-[2px]"
                 style={subtitleTextStyle}
@@ -126,7 +126,7 @@ function SolutionFeatureCard({
             </p>
             <div
               className={cn(
-                "mt-4 h-[4.75rem] max-w-sm overflow-hidden",
+                "mt-4 h-[4.75rem] max-w-sm overflow-hidden text-center",
               )}
             >
               <p

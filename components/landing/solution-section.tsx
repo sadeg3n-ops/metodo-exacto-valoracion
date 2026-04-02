@@ -6,6 +6,42 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Reveal } from "@/components/ui/reveal"
 import { cn } from "@/lib/utils"
 
+type ProcessCardVariant = "A" | "B"
+
+const PROCESS_CARD_VARIANT: ProcessCardVariant = "B"
+
+const variantStyles: Record<
+  ProcessCardVariant,
+  {
+    textBlockClass: string
+    titleClass: string
+    subtitleWrapClass: string
+    subtitleClass: string
+    accentLineClass?: string
+    descriptionWrapClass: string
+  }
+> = {
+  A: {
+    textBlockClass: "max-w-[17rem] text-left",
+    titleClass:
+      "text-2xl font-semibold leading-[1.02] text-white md:text-[2rem]",
+    subtitleWrapClass: "mt-3",
+    subtitleClass:
+      "block text-[1rem] font-semibold leading-[1.22] tracking-[0.01em] text-primary md:text-[1.05rem]",
+    descriptionWrapClass: "mt-5 h-[4.75rem] max-w-[16.5rem] overflow-hidden text-left",
+  },
+  B: {
+    textBlockClass: "max-w-[17rem] text-left",
+    titleClass:
+      "text-2xl font-semibold leading-[1.02] text-white md:text-[2rem]",
+    subtitleWrapClass: "mt-3.5",
+    subtitleClass:
+      "block text-[1rem] font-semibold leading-[1.22] tracking-[0.01em] text-primary md:text-[1.05rem]",
+    accentLineClass: "mb-3 h-px w-14 bg-gradient-to-r from-primary/75 via-primary/30 to-transparent",
+    descriptionWrapClass: "mt-5 h-[4.75rem] max-w-[16.5rem] overflow-hidden text-left",
+  },
+}
+
 const features = [
   {
     title: "Entrenamiento programado",
@@ -46,9 +82,7 @@ function SolutionFeatureCard({
 }) {
   const [isMobileViewport, setIsMobileViewport] = useState(false)
   const isMobileActive = isMobileViewport && isMobileOpen
-  const subtitleTextStyle = {
-    textShadow: "0 1px 2px rgba(0,0,0,0.55), 0 0 16px rgba(234,109,31,0.12)",
-  } as const
+  const activeVariant = variantStyles[PROCESS_CARD_VARIANT]
 
   useEffect(() => {
     if (typeof window === "undefined") return
@@ -104,31 +138,33 @@ function SolutionFeatureCard({
           className="absolute inset-0 opacity-90"
           style={{
             background:
-              "radial-gradient(circle at 22% 78%, rgba(0,0,0,0.34) 0%, rgba(0,0,0,0.18) 28%, rgba(0,0,0,0) 58%)",
+              "radial-gradient(circle at 26% 82%, rgba(0,0,0,0.44) 0%, rgba(0,0,0,0.28) 24%, rgba(0,0,0,0.10) 42%, rgba(0,0,0,0) 62%)",
           }}
         />
 
-        <CardContent className="relative z-10 flex h-full flex-col justify-end p-6 text-center md:p-8">
-          <div className="mx-auto max-w-sm">
+        <CardContent className="relative z-10 flex h-full flex-col justify-end p-6 md:p-8">
+          <div className={activeVariant.textBlockClass}>
             <h3
-              className="mb-2 text-2xl font-semibold text-white"
-              style={{ textShadow: "0 2px 10px rgba(0,0,0,0.45)" }}
+              className={activeVariant.titleClass}
+              style={{ textShadow: "0 2px 14px rgba(0,0,0,0.48)" }}
             >
               {feature.title}
             </h3>
-            <p className="flex justify-center leading-[1.15]">
-              <span
-                className="inline-flex max-w-full rounded-md bg-black/26 px-2.5 py-1 text-base font-semibold tracking-[0.01em] text-primary ring-1 ring-white/6 backdrop-blur-[2px]"
-                style={subtitleTextStyle}
+            <div className={activeVariant.subtitleWrapClass}>
+              {activeVariant.accentLineClass ? (
+                <div className={activeVariant.accentLineClass} />
+              ) : null}
+              <p
+                className={activeVariant.subtitleClass}
+                style={{
+                  textShadow:
+                    "0 1px 2px rgba(0,0,0,0.62), 0 0 18px rgba(234,109,31,0.12)",
+                }}
               >
                 {feature.subtitle}
-              </span>
-            </p>
-            <div
-              className={cn(
-                "mt-4 h-[4.75rem] max-w-sm overflow-hidden text-center",
-              )}
-            >
+              </p>
+            </div>
+            <div className={activeVariant.descriptionWrapClass}>
               <p
                 className={cn(
                   "text-sm leading-relaxed text-slate-300 transition-opacity duration-200 ease-out md:text-base",
